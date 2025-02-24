@@ -5,7 +5,7 @@ import { usePayment } from "./PaymentContext";
 const PaymentButton = () => {
 
     const { setIsPaymentSuccessful } = usePayment();
-    const APiURL = 'http://localhost:3000'
+    const APiURL = import.meta.env.VITE_API_URL
 
     const { isLoading, Razorpay } = useRazorpay();
 
@@ -19,7 +19,7 @@ const PaymentButton = () => {
         const data = await response.json()
 
         const options = {
-            key: "rzp_test_8SLiUeYGFPtApi",
+            key: import.meta.env.VITE_API_KEY,
             amount: data.amount, // Amount in paise
             currency: "INR",
             name: "SathiGoto",
