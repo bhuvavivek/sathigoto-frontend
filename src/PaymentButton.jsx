@@ -1,36 +1,70 @@
-import axios from "axios";
-import { useState } from "react";
+import { useRazorpay } from "react-razorpay";
+import { usePayment } from "./PaymentContext";
+
 
 const PaymentButton = () => {
-    const [loading, setLoading] = useState(false);
-    const [paymentLink, setPaymentLink] = useState("");
+
+    const { setIsPaymentSuccessful } = usePayment();
+    const APiURL = 'http://localhost:3000'
+
+    const { isLoading, Razorpay } = useRazorpay();
 
     const handlePayment = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.post("http://127.0.0.1:8000/api/initiate-payment", {
-                amount: 1, // Amount in your currency
-                user: "9876543210", // User's phone number
-            });
+        const response = await fetch(`${APiURL}/create-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        const data = await response.json()
 
-            if (response.data.success) {
-                setPaymentLink(response.data.payment_link);
-                window.location.href = response.data.payment_link; // Redirect user to QuickPay
-            } else {
-                alert("Payment request failed!");
-            }
-        } catch (error) {
-            console.error("Payment Error:", error);
-            alert("An error occurred while processing payment.");
-        } finally {
-            setLoading(false);
+        const options = {
+            key: "rzp_test_8SLiUeYGFPtApi",
+            amount: data.amount, // Amount in paise
+            currency: "INR",
+            name: "SathiGoto",
+            description: "Test Transaction",
+            // image:'',
+            order_id: data.order_id, // Generate order_id on server
+            handler: (response) => {
+                fetch(`${APiURL}/verify-payment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature
+                    })
+                }).then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'ok') {
+                            setIsPaymentSuccessful(true)
+                            window.location.href = '/payment-success';
+                        } else {
+                            setIsPaymentSuccessful(false)
+                            alert('Payment verification failed');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Error verifying payment');
+                    });
+            },
+
+            theme: {
+                color: "#F37254",
+            },
         }
+
+        const razorpayInstance = new Razorpay(options);
+        razorpayInstance.open();
     };
 
     return (
         <div>
-            <button className="payment-btn" onClick={handlePayment} disabled={loading}>
-                {loading ? "Processing..." : "Book Your Slot"}
+            <button className="payment-btn" onClick={handlePayment} disabled={isLoading} >
+                Book Your Slot
             </button>
         </div>
     );
