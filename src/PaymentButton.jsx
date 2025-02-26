@@ -1,8 +1,10 @@
 import { useRazorpay } from "react-razorpay";
+import { useNavigate } from "react-router-dom";
 import { usePayment } from "./PaymentContext";
 
-
 const PaymentButton = () => {
+
+    const navigate = useNavigate()
 
     const { setIsPaymentSuccessful } = usePayment();
     const APiURL = import.meta.env.VITE_API_URL
@@ -42,14 +44,14 @@ const PaymentButton = () => {
                         .then(data => {
                             if (data.status === 'ok') {
                                 setIsPaymentSuccessful(true)
-                                window.location.href = '/payment-success';
+                                navigate('/thankyou')
                             } else {
                                 setIsPaymentSuccessful(false)
-                                alert('Payment verification failed');
+                                // alert('Payment verification failed');
                             }
                         }).catch(error => {
                             console.error('Error:', error);
-                            alert('Error verifying payment');
+                            // alert('Error verifying payment');
                         });
                 },
 
@@ -69,7 +71,7 @@ const PaymentButton = () => {
     return (
         <div>
             <button className="payment-btn" onClick={handlePayment} disabled={isLoading} >
-                Book Your Slot
+                Register Now
             </button>
         </div>
     );

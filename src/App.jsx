@@ -3,6 +3,8 @@ import './App.css';
 import Home from './Home';
 import { PaymentProvider } from './PaymentContext';
 import Success from './Success';
+import Thankyou from './Thankyou';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -11,6 +13,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/payment-success" element={<Success />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/thankyou" element={<Thankyou />} />
+          </Route>
         </Routes>
       </Router>
     </PaymentProvider>

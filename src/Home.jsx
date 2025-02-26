@@ -6,7 +6,7 @@ const Home = () => {
       <nav className="nav">
         <div className="logo-container">
           <img className="logo" src="assets/logo.png" alt="logo" />
-          <img src="assets/menu.png" className="menu-btn" id="menu-btn" />
+          {/* <img src="assets/menu.png" className="menu-btn" id="menu-btn" /> */}
         </div>
         {/* <ul className="list-items">
             <li className="list">
@@ -36,16 +36,13 @@ const Home = () => {
       </nav>
       <div className="container">
         <div className="container-left">
-          <p className="text-small">Because you deserve better!</p>
+          <p className="text-small">Because you deserve a love that lasts!</p>
           <h2 className="title">
-            Get noticed for <span className="title-s">who</span> you are,
-            <span className="title-s">not what</span> you look like.
+            Let love guide you to<span className="title-s"> the one  </span>
+            <span className="title-s"> who truly belongs  </span>to your heart.
           </h2>
           <p className="text">
-            You’re more than just a photo. You have stories to tell, and
-            passions to share, and things to talk about that are more
-            interesting than the weather. Because you deserve what dating
-            deserves: better.
+            We believe in true connections beyond appearances. With a 100% guarantee, find a partner who understands you and turn your journey into lifelong happiness.
           </p>
           <PaymentButton />
           <div className="stats-container">

@@ -24,7 +24,7 @@ header {
 }
 
 .logo-container {
-    flex: 0.3;
+    flex: 1;
 }
 
 .logo {
@@ -117,7 +117,7 @@ header {
 }
 
 .container-left {
-    padding-top: 100px;
+    padding-top: 70px;
     padding-left: 40px;
     position: relative;
 }
@@ -139,7 +139,7 @@ header {
 
 .title {
     margin-top: 20px;
-    font-size: 3.8rem;
+    font-size: 3.6rem;
 }
 
 .title-s {
@@ -199,6 +199,18 @@ header {
 }
 
 .payment-btn {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.expore-btn {
     margin-top: 30px;
     padding: 15px 30px;
     background: var(--primary-color);
@@ -282,6 +294,8 @@ header {
         z-index: 1;
         align-items: center;
         height: 100%;
+        align-items: center;
+        justify-content: center;
     }
 
     .container-right {
@@ -365,6 +379,8 @@ header {
         display: block;
     }
 }
+
+
 
 @media (min-width: 1230px) and (max-width: 1550px) {
 
