@@ -38,9 +38,10 @@ const Home = () => {
         <div className="container-left">
           <p className="text-small">Because you deserve a love that lasts!</p>
           <h2 className="title">
-            Let love guide you to<span className="title-s"> the one  </span>
-            <span className="title-s"> who truly belongs  </span>to your heart.
+            शादी आपकी<span className="title-s"> जिम्मेदारी </span>
+            <span className="title-s">हमारी </span>
           </h2>
+
           <p className="text">
             We believe in true connections beyond appearances. With a 100% guarantee, find a partner who understands you and turn your journey into lifelong happiness.
           </p>
